@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Masthead } from "@/components/masthead";
 import { isAuthenticated } from "@/lib/auth";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,6 +41,7 @@ export default async function RootLayout({
         >
           <Masthead authenticated={authenticated} />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

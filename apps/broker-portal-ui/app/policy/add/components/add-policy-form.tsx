@@ -25,6 +25,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CrossCircledIcon, PlusIcon } from "@radix-ui/react-icons";
+import { submitPolicy } from "@/lib/policies";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
@@ -36,6 +39,9 @@ function generateNewInfoLine(): FormSchemaType["lines"][number] {
 }
 
 export function AddPolicyForm() {
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm({
     mode: "all",
     resolver: zodResolver(formSchema),
@@ -50,8 +56,27 @@ export function AddPolicyForm() {
     name: "lines",
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const result = await submitPolicy({
+      ixr: values.ixr ?? null,
+      policyName: values.policyName,
+      insurableLimit: values.insurableLimit ?? 1,
+      lines: values.lines.map((line) => line.value),
+    });
+
+    if (result) {
+      toast({
+        title: "Great news!",
+        description: "Your policy has been submitted!",
+      });
+      router.push("/");
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong",
+        description: "There was an issue while submitting policy.",
+      });
+    }
   }
 
   function onAddInfoLine() {
