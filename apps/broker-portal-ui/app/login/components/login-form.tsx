@@ -18,7 +18,6 @@ export function LoginForm() {
   const [loginError, setLoginError] = useState(false);
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    console.log(e);
     e.preventDefault();
     e.stopPropagation();
 
@@ -50,6 +49,7 @@ export function LoginForm() {
               <Input
                 tabIndex={0}
                 autoFocus
+                autoComplete="username"
                 id="username"
                 name="username"
                 placeholder="Username"
@@ -59,6 +59,7 @@ export function LoginForm() {
             <div className="flex flex-col space-y-1.5">
               <Input
                 tabIndex={1}
+                autoComplete="current-password"
                 id="password"
                 name="password"
                 placeholder="Password"
