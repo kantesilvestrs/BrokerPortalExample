@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
 import { authenticateResponseSchema } from "./auth.schema";
+import { revalidatePath } from "next/cache";
 
 export async function checkAuthentication(): Promise<void> {
   const cookieStore = cookies();
@@ -64,4 +65,8 @@ export async function authenticate({ username, password }: { username: string; p
   }
 
   redirect('/', RedirectType.push)
+}
+
+export async function revalidateMasthead(): Promise<void> {
+  revalidatePath('/', 'layout')
 }

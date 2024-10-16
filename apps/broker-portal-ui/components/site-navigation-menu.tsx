@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { forwardRef } from "react";
 import Link from "next/link";
+import { revalidateMasthead } from "@/lib/auth";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -48,7 +49,10 @@ export function SiteNavigationMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/logout" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink
+              className={navigationMenuTriggerStyle()}
+              onClick={() => revalidateMasthead()}
+            >
               Logout
             </NavigationMenuLink>
           </Link>
