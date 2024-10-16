@@ -3,7 +3,11 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { SiteNavigationMenu } from "./site-navigation-menu";
 
-export function Masthead(): JSX.Element {
+export function Masthead({
+  authenticated,
+}: {
+  authenticated: boolean;
+}): JSX.Element {
   return (
     <>
       <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
@@ -15,7 +19,7 @@ export function Masthead(): JSX.Element {
         />
         <h2 className="text-lg font-semibold self-center">Broker Portal</h2>
         <div className="min-w-[195px] flex flex-row">
-          <SiteNavigationMenu />
+          {authenticated && <SiteNavigationMenu />}
         </div>
       </div>
       <Separator />
