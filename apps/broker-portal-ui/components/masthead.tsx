@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Separator } from "./ui/separator";
+import { Button } from "./ui/button";
+import { SiteNavigationMenu } from "./site-navigation-menu";
 
 export function Masthead(): JSX.Element {
   return (
@@ -12,7 +14,9 @@ export function Masthead(): JSX.Element {
           height={29}
         />
         <h2 className="text-lg font-semibold self-center">Broker Portal</h2>
-        <div className="min-w-[195px]"></div>
+        <div className="min-w-[195px] flex flex-row">
+          <SiteNavigationMenu />
+        </div>
       </div>
       <Separator />
     </>
